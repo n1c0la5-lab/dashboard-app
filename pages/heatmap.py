@@ -1,6 +1,5 @@
 #######################
 # Import libraries
-import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -8,8 +7,6 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 import yfinance as yf
 import pandas as pd
-
-df = st.session_state['df']
 
 # %% Initialization
 
