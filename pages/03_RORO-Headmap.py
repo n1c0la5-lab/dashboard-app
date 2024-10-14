@@ -9,7 +9,7 @@ from datetime import datetime
 import yfinance as yf
 import pandas as pd
 
-df = st.session_state['df']
+st.markdown('#### RORO Heat Map')
 
 # %% Initialization
 
@@ -136,12 +136,12 @@ def plot_percentile_heatmap(df, end_date):
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust the rect to make space for the title
 
     # Return the heatmap
-    return fig, ax  # or ax if you only need the axes object
+    st.pyplot(fig, ax)
 
-    # Show the plot
-    end_date = '2024-09-30'
-    frequency = 'W'
-    risk_prices, safe_prices, benchmark_prices = retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency)
-    final_df = calculate_standardized_period_returns(risk_prices, safe_prices, benchmark_prices, frequency=frequency)
-    percentile_ranks = calculate_percentiles(final_df)  # Calculate percentile ranks
-    plot_percentile_heatmap(percentile_ranks, end_date) # Call the function to plot
+# Show the plot
+end_date = '2024-09-30'
+frequency = 'W'
+risk_prices, safe_prices, benchmark_prices = retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency)
+final_df = calculate_standardized_period_returns(risk_prices, safe_prices, benchmark_prices, frequency=frequency)
+percentile_ranks = calculate_percentiles(final_df)  # Calculate percentile ranks
+plot_percentile_heatmap(percentile_ranks, end_date) # Call the function to plot
