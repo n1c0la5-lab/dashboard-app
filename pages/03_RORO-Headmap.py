@@ -9,6 +9,11 @@ from datetime import datetime
 import yfinance as yf
 import pandas as pd
 
+#######################
+# API Keys
+import nasdaqdatalink as nasdaq
+nasdaq.read_key(filename="/data/.corporatenasdaqdatalinkapikey")
+
 st.markdown('#### RORO Heat Map')
 
 # %% Initialization
@@ -23,7 +28,7 @@ safe_tickers = [
     'TLT', 'BIL', 'SPLV', 'XLP', 'XLU', 'XLV', 'GLD',
 ]
 
-def retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency='M', benchmark='SPY'):
+def retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency='M', benchmark='DX-Y'):
 
     # create empty dataframes
     risk_prices = pd.DataFrame()

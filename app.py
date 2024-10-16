@@ -3,12 +3,6 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-from dateutil.relativedelta import relativedelta
-from datetime import datetime
-import yfinance as yf
 
 #######################
 # Page configuration
@@ -30,6 +24,7 @@ if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     # Session State is a way to share variables between reruns.
     st.session_state['df'] = df
+
 
 #######################
 # Dashboard Main Panel
