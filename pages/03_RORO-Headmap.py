@@ -11,24 +11,26 @@ import pandas as pd
 
 #######################
 # API Keys
-import nasdaqdatalink as nasdaq
-nasdaq.read_key(filename="/data/.corporatenasdaqdatalinkapikey")
+# import nasdaqdatalink as nasdaq
+# nasdaq.read_key(filename="/data/.corporatenasdaqdatalinkapikey")
 
-st.markdown('#### RORO Heat Map')
+st.markdown('#### Risk-On vs. Risk-Off Market Dashboard')
+st.divider()
+
 
 # %% Initialization
 
 risk_tickers = [
     'ARKK', 'SPHB', 'BTC-USD', 'XBI', 'XLK', 'SOXX', 'XLY', 'IWM', 'EEM',
-    'HYG', 'USO', 'DBC', 'CPER',
+    'HYG', 'USO', 'DBC', 'CPER', 'SPY', 
     'AUDJPY=X',
 ]
 
 safe_tickers = [
-    'TLT', 'BIL', 'SPLV', 'XLP', 'XLU', 'XLV', 'GLD',
+    'TLT', 'BIL', 'SPLV', 'XLP', 'XLU', 'XLV', 'GLD', 'DX-Y.NYB',
 ]
 
-def retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency='M', benchmark='DX-Y'):
+def retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency='M', benchmark='DX-Y.NYB'):
 
     # create empty dataframes
     risk_prices = pd.DataFrame()
@@ -130,7 +132,7 @@ def plot_percentile_heatmap(df, end_date):
     fig.suptitle(f"Risk-On vs. Risk Off Percentile Dashboard: {end_date}", fontsize=16)
 
     # Add a thick border between the last risk on ticker and first risk off ticker
-    ax.axhline(y=len(risk_tickers), color='black', linewidth=3)
+    ax.axhline(y=len(risk_tickers), color='black', linewidth=5)
 
     # Change color bar tick color
     colorbar = ax.collections[0].colorbar
@@ -144,9 +146,11 @@ def plot_percentile_heatmap(df, end_date):
     st.pyplot(fig, ax)
 
 # Show the plot
-end_date = '2024-09-30'
+end_date = '2024-10-14'
 frequency = 'W'
 risk_prices, safe_prices, benchmark_prices = retrieve_all_prices_yf(risk_tickers, safe_tickers, end_date, frequency)
 final_df = calculate_standardized_period_returns(risk_prices, safe_prices, benchmark_prices, frequency=frequency)
 percentile_ranks = calculate_percentiles(final_df)  # Calculate percentile ranks
 plot_percentile_heatmap(percentile_ranks, end_date) # Call the function to plot
+
+st.divider()

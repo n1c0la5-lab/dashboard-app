@@ -8,7 +8,7 @@ import altair as alt
 # Page configuration
 
 st.set_page_config(
-    page_title="Futures Trading Dashboard",
+    page_title="Building a Trading Decision Dashboard in Python with Streamlit",
     page_icon="🧭",
     layout="wide",
     initial_sidebar_state="expanded")
